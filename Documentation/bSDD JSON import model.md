@@ -76,7 +76,7 @@ NB Default values will only be applied if a field is not specified. If you speci
 
 | Field                     | DataType                       | Requ- ired? | Trans- latable? | Description                                                                                                        |
 |---------------------------|--------------------------------|-------------|-----------------|--------------------------------------------------------------------------------------------------------------------|
-| <span id="Code">Code</span>                      | Text                           | ✅         |            | Unique identification of the class within the dictionary. Example: "abc-00123-01" or "SpecialWall". Code validation applies, see: [Code format](#code-format). The prefix 'Ifc' is reserved for the IFC standard.                         |
+| <span id="Code">Code</span>                      | Text                           | ✅         |            | Unique identification of the class within the dictionary. This is the information to be used as an identifier in IFC models. Example: "abc-00123-01" or "SpecialWall". Code validation applies, see: [Code format](#code-format). The prefix 'Ifc' is reserved for the IFC standard.                         |
 | <span id="Name">Name</span>                      | Text                           | ✅         | ✅         | Name of the `Class,` Example: "IfcCurtainWall"                                                                   |
 | <span id="ClassType">ClassType</span>                 | Text                           | ✅*        |            | Must be one of: `Class`, `Material`, `GroupOfProperties`, `AlternativeUse`. Read more about [class types](#class-types). If not specified, the `Class` type will be used by default. The types `ReferenceDocument`, `ComposedProperty` and `Dictionary` were deprecated and can not be used on upload but may be present in API results for the duration of transition time. |
 | <span id="Definition">Definition</span>                | Text                           |            | ✅          | Definition of the `Class`, explaining the semantic meaning. A required field according to the ISO. Supports [double square bracket links](#double-square-bracket-links).  |
@@ -115,7 +115,7 @@ Note: Since the release of November 2023, Materials are not treated separately a
 
 | Field                         | DataType     | Requ- ired? | Trans- latable? | Description                                                                                                                                          |
 |-------------------------------|--------------|-----------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="Code">Code</span>                          | Text         | ✅       |             | Unique identification of the property within the dictionary. Example: "abc-00123-01" or "ExternalArea". Code validation applies, see: [Code format](#code-format).                                                                          |
+| <span id="Code">Code</span>                          | Text         | ✅       |             | Unique identification of the property within the dictionary. This is the information to be used as an identifier in IFC models. Example: "abc-00123-01" or "ExternalArea". Code validation applies, see: [Code format](#code-format).                                                                          |
 | <span id="Name">Name</span>                          | Text         | ✅       | ✅           | Name of the Property Example: "External Area"                                                                                                               |
 | <span id="Definition">Definition</span>                    | Text         |         | ✅           | Definition of the `Property`, explaining the semantic meaning. A required field according to the ISO. Supports [double square bracket links](#double-square-bracket-links). |
 | <span id="Description">Description</span>                   | Text         |         | ✅           | Additional field for supplementary explanation. Please only use it if the _Definition_ comes from a standard and requires further explanation.  |
@@ -201,8 +201,8 @@ Optional value enumerations that can be listed for `Properties` and `ClassProper
 
 | Field                    | DataType | Requ- ired? | Trans- latable? | Description                                                                 |
 |--------------------------|----------|-----------|---------------|-----------------------------------------------------------------------------|
-| <span id="Code">Code</span>             | Text     | ✅       |             | Code is a unique identification of the value (max 20 characters). It is required and, in most cases is the same as the value. It is needed to enable translations of Values or their Descriptions. Code validation applies, see: [Code format](#code-format). |
-| <span id="Value">Value</span> | Text     | ✅       | ✅       | One of the Values the property can have, Example: "Green" in case the Property is something like "Color"|
+| <span id="Code">Code</span>             | Text     | ✅       |             | Code is a unique identification of the value. This is the information to be used as an identifier in IFC models. It is required and, in most cases, is the same as the value. It is needed to enable translations of Values or their Descriptions. Code validation applies, see: [Code format](#code-format). |
+| <span id="Value">Value</span> | Text     | ✅       | ✅       | The name of the value, example: "Green" (for Property "Color"). This is mainly for translation, and not to be used in IFC models. |
 | <span id="Description">Description</span> | Text     |        | ✅       | A description of the value|
 | <span id="Uri">Uri</span>*| Text |  |  | * To be deprecated in the new model version, as it overlaps with the OwnedUri. |
 | <span id="SortNumber">SortNumber</span> | Integer     |        |             | SortNumber of the Value in the list of Values of the `Property` it belongs to|
@@ -246,6 +246,8 @@ Some examples of valid codes are: "bs-agri", "apple", "éÄą _- (Д開発,...ż
 
 Codes need to be unique within the same data dictionary and are used to generate URIs.
 
+Code length limit is 100 characters.
+
 Some codes might be reserved, for example, the IFC standard reserves the codes starting with a prefix 'Ifc' and 'Pset'. 
 
 <h3 id="class-types">Class types</h3>
@@ -269,7 +271,7 @@ specific class of “IfcWall”. In bSDD terminology, we say that “IfcWall” 
 
 `ClassRelation` and `PropertyRelation`- use those to link your concepts with each other. Relations allow us to define parent-child links also with other dictionaries. Apart from specialization, you can also define other types of relations, such as decomposition (`HasPart` type, see the list of possible types: [Relation types](#relation-types)).
 
-`RelatedIfcEntityNamesList` - IFC is a top-level schema (foundation classes) used for exchanging information between software. Because of that, the bSDD provides a special way to relate your class to IFC. Use `RelatedIfcEntityNamesList` to show which entities from IFC you are referring to or extending. For example, “Signaling LED diode” relates to “IfcLamp” from IFC. `RelatedIfcEntityNamesList` can be used by bSDD-related tools to filter the list of possible classes to a particular IFC category.
+`RelatedIfcEntityNamesList` - IFC is a top-level schema (foundation classes) used for exchanging information between software. Because of that, the bSDD provides a special way to relate your class to IFC. Use `RelatedIfcEntityNamesList` to show which entities from IFC you are referring to or extending. For example, “Signalling LED diode” relates to “IfcLamp” from IFC. `RelatedIfcEntityNamesList` can be used by bSDD-related tools to filter the list of possible classes to a particular IFC category.
 
 <h3 id="relation-types">Relation types</h3>
 
@@ -345,33 +347,6 @@ Use Dynamic Properties to tell which other properties influence the value of the
 Example: _The 'Area' of a wall depends on its 'Height' and 'Length', following the formula: A = H * L._
 
 ⚠️ This feature comes from the ISO standard but is rarely supported by software implementation. Consider avoiding Dynamic Properties to make the data dictionary more accessible.
-
-<h3 id="restricting-property-values">Restricting property values</h3>
-
-🚧 TO BE DEVELOPED 🚧
-`AllowedValues`...
-
-`Min/MaxInc/Exclusive`...
-
-`Pattern`...
-
-<h3 id="identifying-bsdd-resources">Identifying bSDD resources</h3>
-
-🚧 TO BE DEVELOPED 🚧
-`URI`... Can be generated by bSDD or external.
-
-`Code`...  See section [Code format](#code-format).
-
-`UID`(GUID)...
-
-<h3 id="specifying-units">Specifying units</h3>
-
-🚧 TO BE DEVELOPED 🚧
-`Unit(s)`...
-
-`Dimension`...
-
-`PhysicalQuantity`...
 
 <h3 id="double-square-bracket-links">Double square bracket links</h3>
 It is possible to reference other resources from the same dictionary using double square brackets, and the platform will replace the brackets with hyperlinks pointing to that resource. In cases where the same code exists for both class and property, the hyperlink will point to the class. If the code is not found, the square brackets are omitted. The API returns the definition with square brackets. 
