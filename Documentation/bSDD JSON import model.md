@@ -92,7 +92,7 @@ NB Default values will only be applied if a field is not specified. If you speci
 | <span id="DeActivationDateUtc">DeActivationDateUtc</span>       | DateTime                       |            |             | See [Date Time format](#datetime-format). |
 | <span id="DeprecationExplanation">DeprecationExplanation</span>    | Text                           |            | ✅         | Only fill for deprecated definitions. |
 | <span id="DocumentReference">DocumentReference</span>         | Text                           |            |             | Reference to document with the full or official definition of the `Class`. See reference list [reference documents](https://api.bsdd.buildingsmart.org/api/ReferenceDocument/v1). |
-| <span id="OwnedUri">OwnedUri</span>                  | Text                           |            |             | If you specified `UseOwnUri = true` at the dictionary level, you must supply the URI that globally uniquely identifies the `Class`  |
+| <span id="OwnedUri">OwnedUri</span>                  | Text                           |  ✳️        |             | If you specified `UseOwnUri = true` at the dictionary level, you must supply the URI that globally uniquely identifies the `Class`.  |
 | <span id="ReplacedObjectCodes">ReplacedObjectCodes</span>       | List of text                   |            |             | List of Class Codes this Class replaces                                                          |
 | <span id="ReplacingObjectCodes">ReplacingObjectCodes</span>      | List of text                   |            |             | List of Class Codes this class is replaced by                                                    |
 | <span id="RevisionDateUtc">RevisionDateUtc</span>           | DateTime                       |            |             | See [Date Time format](#datetime-format). |
@@ -145,7 +145,7 @@ Note: Since the release of November 2023, Materials are not treated separately a
 | <span id="MinExclusive">MinExclusive</span>            | Real     |         |             | Minimum allowed value, exclusive |
 | <span id="MinInclusive">MinInclusive</span>            | Real     |         |             | Minimum allowed value, inclusive |
 | <span id="MethodOfMeasurement">MethodOfMeasurement</span>           | Text         |         | ✅           | Example: "Thermal transmittance according to ISO 10077-1"                                                                                                |
-| <span id="OwnedUri">OwnedUri</span>                | Text                           |         |            | If you specified `UseOwnUri = true` at the dictionary level, you must supply the URI that globally uniquely identifies the Property  |
+| <span id="OwnedUri">OwnedUri</span>                | Text                           | ✳️        |            | If you specified `UseOwnUri = true` at the dictionary level, you must supply the URI that globally uniquely identifies the `Property`.  |
 | <span id="Pattern">Pattern</span>            | Text     |         |             | An [XML Schema regular expression](https://www.regular-expressions.info/xml.html) to limit allowed values |
 | <span id="PhysicalQuantity">PhysicalQuantity</span>              | Text         |         | ✅           | Name of the physical quantity of the property, Example: "without" or "mass"                                                                               |
 | <span id="PropertyValueKind">PropertyValueKind</span>             | Text         |         |             | Must be one of:  `Single` (one value; this is the default),  `Range` (two values),  `List` (multiple values), `Complex` (neither single/range/list, for example an object like IfcActor or an aggregation of connected properties - see [assembling properties](#assembling-properties)), `ComplexList` (list of complex values).   |
@@ -187,7 +187,7 @@ Through `ClassProperty`, one can further specify a 'Property' by defining its un
 | <span id="MinExclusive">MinExclusive</span>        | Real     |         |     | Minimum allowed value, exclusive. Overrides the value defined for the `Property`. Do not fill both 'inclusive' and 'exclusive' values. |
 | <span id="MinInclusive">MinInclusive</span>        | Real     |         |     | Minimum allowed value, inclusive. Overrides the value defined for the `Property`. Do not fill both 'inclusive' and 'exclusive' values. |
 | <span id="Pattern">Pattern</span>             | Text     |         |     | An [XML Schema regular expression](https://www.regular-expressions.info/xml.html) to limit allowed values. Overrides the pattern defined for the Property |
-| <span id="OwnedUri">OwnedUri</span>                | Text                           |         |            | If you specified `UseOwnUri = true` at the dictionary level, you must supply the URI that globally uniquely identifies the ClassProperty  |
+| <span id="OwnedUri">OwnedUri</span>                | Text                           |         |            | If you specified `UseOwnUri = true` at the dictionary level, you can supply the URI that globally uniquely identifies the `ClassProperty`. Otherwise, the URI will be auto-generated.  |
 | <span id="PropertyType">PropertyType</span>        | Text     |         |     | Type of the `Property` for the `Class`: `Property` (default) or `Dependency`                                      |
 | <span id="SortNumber">SortNumber</span>          | Integer  |         |     | Sort number of this `Property` within the `Class`                                                                 |
 | <span id="Symbol">Symbol</span>              | Text     |         |     |                                                                                                                        |
@@ -206,7 +206,7 @@ Optional value enumerations that can be listed for `Properties` and `ClassProper
 | <span id="Description">Description</span> | Text     |        | ✅       | A description of the value|
 | <span id="Uri">Uri</span>*| Text |  |  | * To be deprecated in the new model version, as it overlaps with the OwnedUri. |
 | <span id="SortNumber">SortNumber</span> | Integer     |        |             | SortNumber of the Value in the list of Values of the `Property` it belongs to|
-| <span id="OwnedUri">OwnedUri</span>                | Text                           |         |            | If you specified `UseOwnUri = true` at the dictionary level, you can supply the URI that globally uniquely identifies the AllowedValue  |
+| <span id="OwnedUri">OwnedUri</span>                | Text                           |         |            | If you specified `UseOwnUri = true` at the dictionary level, you can supply the URI that globally uniquely identifies the `AllowedValue`. Otherwise, the URI will be auto-generated.  |
 
 Note: adding translations of the `AllowedValue` is not supported yet
 
@@ -220,7 +220,7 @@ Note: adding translations of the `AllowedValue` is not supported yet
 | <span id="RelatedClassUri">RelatedClassUri</span> | Text     | ✅       |             | Full URI of the related `Class`. It can be to same or a different `Dictionary`. Example: https://identifier.buildingsmart.org/uri/etim/etim/8.0/class/EC002987|
 | <span id="RelatedClassName">RelatedClassName</span> | Text     |        |             |  |
 | <span id="Fraction">Fraction</span>       | Real     |        |             | Only applicable to `HasMaterial` relation. Optional provision of a fraction of the total amount (Example: volume or weight) that applies to the Class owning the relations. The sum of Fractions per class/relationtype must be 1. Similar to Fraction in [IfcMaterialConstituent](http://ifc43-docs.standards.buildingsmart.org/IFC/RELEASE/IFC4x3/HTML/lexical/IfcMaterialConstituent.htm)|
-| <span id="OwnedUri">OwnedUri</span>                | Text                           |         |            | If you specified `UseOwnUri = true` at the dictionary level, you must supply the URI that globally uniquely identifies the ClassRelation  |
+| <span id="OwnedUri">OwnedUri</span>                | Text                           |         |            | If you specified `UseOwnUri = true` at the dictionary level, you can supply the URI that globally uniquely identifies the `ClassRelation`. Otherwise, the URI will be auto-generated.  |
 
 
 <h3 id="PropertyRelation">PropertyRelation</h3>
@@ -232,7 +232,7 @@ Analogous to `ClassRelations` but between `Properties`.
 | <span id="RelatedPropertyName">RelatedPropertyName</span> | Text     |        |             | Name of the related `Property`.|
 | <span id="RelatedPropertyUri">RelatedPropertyUri</span> | Text     | ✅       |             | Full URI of the related `Property`. It can be to same or a different `Dictionary`.|
 | <span id="RelationType">RelationType</span>             | Text     | ✅       |             | One of:  `HasReference`,  `IsEqualTo`,  `IsSimilarTo`, ~~IsParentOf,  IsChildOf, HasPart~~. Read more about [Relation types](#relation-types).  |
-| <span id="OwnedUri">OwnedUri</span>                | Text                           |         |            | If you specified `UseOwnUri = true` at the dictionary level, you must supply the URI that globally uniquely identifies the PropertyRelation  |
+| <span id="OwnedUri">OwnedUri</span>                | Text                           |         |            | If you specified `UseOwnUri = true` at the dictionary level, you can supply the URI that globally uniquely identifies the `PropertyRelation`. Otherwise, the URI will be auto-generated.  |
 
 ---
 
@@ -246,7 +246,7 @@ Some examples of valid codes are: "bs-agri", "apple", "éÄą _- (Д開発,...ż
 
 Codes need to be unique within the same data dictionary and are used to generate URIs.
 
-Code length limit is 100 characters.
+The code length limit is 100 characters.
 
 Some codes might be reserved, for example, the IFC standard reserves the codes starting with a prefix 'Ifc' and 'Pset'. 
 
