@@ -18,10 +18,10 @@
 
 The bSDD is a service to facilitate the distribution of data dictionaries (read below about what those are) published by independent organisations. The diagram below shows the simplified data model behind the bSDD:
 
-<img src="https://raw.githubusercontent.com/buildingSMART/bSDD/master/Documentation/graphics/bSDD_data_model.png" alt="bSDD entity diagram" style="width: 650px"/>
+<img src="graphics/bSDD_data_model.png" alt="bSDD entity diagram" style="width: 650px"/>
 
-See our example demonstrating the usage of the above concepts: [bSDD data example](https://raw.githubusercontent.com/buildingSMART/bSDD/master/Documentation/graphics/bSDD_data_example.png):
-<img src="https://raw.githubusercontent.com/buildingSMART/bSDD/master/Documentation/graphics/bSDD_data_example.png" alt="bSDD entity diagram" style="width: 700px"/>
+See our example demonstrating the usage of the above concepts: [bSDD data example](graphics/bSDD_data_example.png):
+<img src="graphics/bSDD_data_example.png" alt="bSDD entity diagram" style="width: 700px"/>
 
 We also have a demonstration dictionary: ["Fruit and vegetables"](https://search.bsdd.buildingsmart.org/uri/bs-agri/fruitvegs/1.1).
 
@@ -29,7 +29,7 @@ We also have a demonstration dictionary: ["Fruit and vegetables"](https://search
 
 <h2 id="json-format">JSON format</h2>
 
-You can deliver data for the buildingSMART Data Dictionary in the JSON file following our standard, which we explain in this document. You can also find the JSON and Excel templates in [/Model/Import Model](https://github.com/buildingSMART/bSDD/tree/master/Model/Import%20Model).
+You can deliver data for the buildingSMART Data Dictionary in the JSON file following our standard, which we explain in this document. You can also find the JSON and Excel templates in [/Model/Import Model](../Model/Import%20Model/).
 
 Click on the link to get the list of allowed codes for [countries](https://api.bsdd.buildingsmart.org/api/Country/v1), [languages](https://api.bsdd.buildingsmart.org/api/Language/v1), [units](https://api.bsdd.buildingsmart.org/api/Unit/v1), [reference documents](https://api.bsdd.buildingsmart.org/api/ReferenceDocument/v1) and [ifc class](https://api.bsdd.buildingsmart.org/api/Dictionary/v2/Classes?uri=https%3A%2F%2Fidentifier.buildingsmart.org%2Furi%2Fbuildingsmart%2Fifc%2F4.3).
 If you think there are reference documents missing, please let us know by [posting an issue](https://github.com/buildingSMART/bSDD/issues). All values in JSON must be strings captured in double quotes, including for numeric Example and AllowedValue fields.
@@ -62,7 +62,7 @@ NB Default values will only be applied if a field is not specified. If you speci
 | <span id="QualityAssuranceProcedure">QualityAssuranceProcedure</span>      | Text      | | | Name or short description of the quality assurance procedure used for the dictionary, Example: "ETIM international", "AFNOR NF XP P07-150 (PPBIM)", "bSI process", "UN GHS 2015", "UN CPC 1.1", "Private", "Unknown" |
 | <span id="QualityAssuranceProcedureUrl">QualityAssuranceProcedureUrl</span>   | Text      | | | Url to a web page with more detailed info on the quality assurance procedure, Example: "https://www.buildingsmart.org/about/bsi-process"  |
 | <span id="ReleaseDate">ReleaseDate</span>                    | DateTime  | | | Date of release of the version, See [Date Time format](#datetime-format).  |
-| <span id="Status">Status</span>                         | Text      | | | Possible version statuses: `Preview`, `Active`, `Inactive`. When uploading a new version, it should always be in `Preview`. You can then activate or deactivate content via [the API](https://app.swaggerhub.com/apis/buildingSMART/Dictionaries/v1) or [Management Portal](https://manage.bsdd.buildingsmart.org/). Read more: [the lifecycle of the bSDD content](https://raw.githubusercontent.com/buildingSMART/bSDD/master/Documentation/bSDD%20import%20tutorial.md#the-lifecycle-of-the-bsdd-dictionary-version)  |
+| <span id="Status">Status</span>                         | Text      | | | Possible version statuses: `Preview`, `Active`, `Inactive`. When uploading a new version, it should always be in `Preview`. You can then activate or deactivate content via [the API](https://app.swaggerhub.com/apis/buildingSMART/Dictionaries/v1) or [Management Portal](https://manage.bsdd.buildingsmart.org/). Read more: [the lifecycle of the bSDD content](bSDD%20import%20tutorial.md#the-lifecycle-of-a-dictionary)  |
 | <span id="Classes">Classes</span>          | List of Class    | ✅    | | List of objects of type `Class`. See section [Class](#class)  |
 | <span id="Properties">Properties</span>       | List of Property | ✅    | | List of objects of type `Property`. See section [Property](#property) |
 
@@ -308,7 +308,7 @@ In bSDD, all resources get a unique identifier - URI. The URI, among other infor
 If you want to reference specific resources but are not sure of the version or want to always point to the most recent version, we implemented the "latest" feature. Now, it is possible to use "latest" instead of a version number, and bSDD will resolve the link to the latest active or preview version containing that resource: 
 .../uri/bs-agri/fruitvegs/**latest**/class/fruit. 
 
-<img src="https://raw.githubusercontent.com/buildingSMART/bSDD/master/Documentation/graphics/latest_example.jpg" alt="bSDD latest" style="width: 750px"/>
+<img src="graphics/latest_example.jpg" alt="bSDD latest" style="width: 750px"/>
 
 Try it out:
 https://search.bsdd.buildingsmart.org/uri/bs-agri/fruitvegs/latest/class/fruit
