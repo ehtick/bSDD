@@ -14,7 +14,7 @@ As part of bSDD housekeeping, we manually review each request, which can take up
 
 The primary form of data upload to bSDD is a properly structured JSON file. In [the data model documentation](https://technical.buildingsmart.org/services/bsdd/data-structure/), we specify what such a file should contain and how to structure it.
 
-You can manually create such a file by coping <a href="../Model/Import Model/bsdd-import-model.json">the JSON template</a>, or use <a href="../Model/Import Model/spreadsheet-import/">the Excel template instructions</a>. Alternatively, use one of <a href="https://technical.buildingsmart.org/resources/software-implementations/?filter_5=bSDD+submit%2Fmanage&amp;mode=any">the third-party tools to manage and upload data dictionaries in bSDD</a>.
+You can manually create such a file by coping <a href="../Model/Import%20Model/bsdd-import-model.json">the JSON template</a>, or use <a href="../Model/Import%20Model/spreadsheet-import/">the Excel template instructions</a>. Alternatively, use one of <a href="https://technical.buildingsmart.org/resources/software-implementations/?filter_5=bSDD+submit%2Fmanage&amp;mode=any">the third-party tools to manage and upload data dictionaries in bSDD</a>.
 
 #### General guidelines
 
@@ -42,7 +42,7 @@ Go to the Dictionaries tab and select your organisation. If you belong to only o
 
 Using the "Select file" button load your dictionary JSON file.
 
-<img src="graphics/bSDD management portal.png" alt="bSDD manage" style="width: 800px" />
+<img src="graphics/bSDD%20management%20portal.png" alt="bSDD manage" style="width: 800px" />
 
 You have the option to first validate if the file is free of errors or upload it for testing by selecting option 'Test upload'. The test upload means the content will be automatically deleted from bSDD after 2 months and it will not be possible to set the status to 'Active' to prevent mistakes.
 
