@@ -33,7 +33,7 @@ At the heart of bSDD is a canonical database, where all dictionaries can be rela
 📢 We inform about planned and recently implemented bSDD updates in this forum topic:
 [bSDD Tech Updates](https://forums.buildingsmart.org/t/bsdd-tech-updates/4889).
 
-* **API documentation** [bSDD API](Documentation/bSDD%20API.md)
+* **API documentation** [bSDD API](<Documentation/bSDD API.md>)
 * **API interactive documentation** on Swagger: https://app.swaggerhub.com/apis/buildingSMART/Dictionaries/v1
 
 We also provide a **TEST** environment where the latest features are rolled out first and tested. If you want to check it out, here are the equivalent pages (not to be used by end-users!):
