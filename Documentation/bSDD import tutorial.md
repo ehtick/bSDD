@@ -1,8 +1,12 @@
+## Publishing the first data dictionary in bSDD
+
 In this tutorial, we explain how to publish and manage bSDD content using [the bSDD Manage portal](https://manage.bsdd.buildingsmart.org/).
 
-## Publishing the first dictionary
+<h3 id="register">1. Register/log in with user account in the bSDD Manage</h3>
 
-<h3 id="register">1. Register your organisation</h3>
+Go to [the bSDD Manage portal](https://manage.bsdd.buildingsmart.org/). If you do not have a bSDD buildingSMART account yet, choose "Sign up now"; otherwise, choose "Sign in".
+
+<h3 id="register">2. Register your organisation</h3>
 
 Each data dictionary in bSDD is published on behalf of a registered organisation. If this is the first time you are uploading, you need to register your organisation in the bSDD. Go to: https://manage.bsdd.buildingsmart.org/my-organization and use `REGISTER NEW ORGANISATION`.
 
@@ -10,7 +14,7 @@ Initially, newly registered organisations are placed in quarantine. They can cre
 
 > Do you want to only experiment with bSDD without registering your organisation? We can add you to the DEMO organisation. For this and other requests, contact us: [CONTACT FORM](https://share.hsforms.com/1RtgbtGyIQpCd7Cdwt2l67A2wx5h).
 
-<h3 id="prepare">2. Prepare the content</h3>
+<h3 id="prepare">3. Prepare the content</h3>
 
 The primary form of data upload to bSDD is a properly structured JSON file. In [the data model documentation](https://technical.buildingsmart.org/services/bsdd/data-structure/), we specify what such a file should contain and how to structure it.
 
@@ -29,42 +33,34 @@ You can manually create such a file by coping <a href="../Model/Import%20Model/b
 - Dictionary code - the dictionary code needs to be unique in the bSDD; choose one that is recognisable with the dictionary name. The dictionary code is used to generate the URIs of all the resources, so it should be short and preferably without spaces. 
 
 **Read more** about good practices for creating data dictionaries: https://technical.buildingsmart.org/services/bsdd/guidelines/
-<h3 id="upload">3. Upload</h3>
 
-Go to [the bSDD Manage portal](https://manage.bsdd.buildingsmart.org/). If you do not have a bSDD buildingSMART account yet, choose "Sign up now"; otherwise, choose "Sign in".
+<h3 id="upload">4. Upload</h3>
 
-Alternatively, use one of <a href="https://technical.buildingsmart.org/resources/software-implementations/?filter_5=bSDD+submit%2Fmanage&amp;mode=any">the third-party tools to manage and upload data dictionaries in bSDD</a>, which integrate with <a href="https://app.swaggerhub.com/apis/buildingSMART/Dictionaries/v1">the bSDD API</a>.
+Go back to the [the bSDD Manage portal](https://manage.bsdd.buildingsmart.org/). 
 
 > __Note:__ If the bSDD Manage portal shows an error at startup or you keep seeing the spinner icon, try pressing:
 > - on Windows / Linux: Ctrl + Shift + R or Ctrl + F5
 > - on Mac: Cmd + Shift + R.
+>   
 > If that doesn't work, then try an "incognito" or "InPrivate" window of your browser and then navigate to the bSDD Manage portal. If that still doesn't work, then contact us: [CONTACT FORM](https://share.hsforms.com/1RtgbtGyIQpCd7Cdwt2l67A2wx5h).
 
 Go to the Dictionaries tab and select your organisation. If you belong to only one organisation, it will appear immediately on the list.
 
 Using the "Select file" button, load your dictionary JSON file.
 
-<img src="x" alt="bSDD manage" style="width: 800px" />
+<img src="https://raw.githubusercontent.com/buildingSMART/bSDD/refs/heads/master/Documentation/graphics/bSDD%20management%20portal.png" alt="bSDD manage" style="width: 800px" />
 
-You have the option to first validate if the file is free of errors or upload it for testing by selecting the 'Test upload'. The test upload means the content will be automatically deleted from bSDD after 2 months and it will not be possible to set the status to 'Active' to prevent mistakes.
+The `Validate` button allows to check if the JSON file is compliant with the bSDD data model and can be imported. We recommend using it with every upload.
+The `Import` button publishes the preloaded file to the bSDD database.
+The `Test dictionary` checkbox is recommended if you are only experimenting with the upload. Test dictionaries cannot be activated and will remain publicly visible for 60 days, after which they will be automatically deleted. The only option to prevent this is to delete and reupload the dictionary.
 
-> __Note:__ If you only want to experiment with the bSDD, we provide an option for a `TEST` upload. This is a safe option for beginners, as the content uploaded as a `TEST` cannot be activated and will automatically be removed after 2 months.
-
-Press "Upload selected file"
-
-Before each import, we recommend first using the option 'Validate only?' This will inform you of any errors or warnings without trying to import the file.
-
-**Important** Uploading a new file with the same version number as already existing will replace the content (only if status is `Preview`, as all other content is immutable - [read more below](#the-lifecycle-of-a-dictionary)).
-
-Once ready, and if the platform returns no errors, click "Upload selected file."
+> __Warning:__ Uploading a new file with the same version number as already existing will replace the content (only if status is `Preview`, as all other content is immutable - [read more below](#the-lifecycle-of-a-dictionary)).
 
 Once the file has been imported, you will receive a more detailed import report by email. It might take up to 15 minutes. If the import routine spots any errors, you will see them listed in the email.
 
 > __Warning:__ Uploading will make the content publicly available. Do not publish anything that you don't want to share with the general public, or you don't have sufficient permission. 
 
 > __Note:__ It is possible to restrict the visibility of a dictionary only to certain users. However, this is a paid feature of bSDD. Read more about [Private dictionaries](https://technical.buildingsmart.org/services/bsdd/private-dictionaries/).
-
-> __Note:__ All of the steps explained above can also be automated using <a href="https://app.swaggerhub.com/apis/buildingSMART/Dictionaries/v1">the bSDD API</a> integration.
 
 <h2 id="dictionary-lifecycle">The lifecycle of a dictionary</h2>
 
@@ -74,14 +70,15 @@ When you publish a new dictionary version in the bSDD, it always initially has t
 
 **⚠️ Once the content is activated, it will get an immutable URI, meaning the content will stay in bSDD permanently and can't be deleted.** It is still possible to change the status to `Inactive`, indicating it should no longer be used, but the page will still exist and show the content. Consider that before activating the version of a dictionary.
 
-<h2 id="dictionary-reupload">Publishing a new dictionary version</h2>
+<h3 id="dictionary-reupload">Publishing a new dictionary version</h2>
 
 Similar to publishing for the first time, you can also upload a new dictionary version by loading a properly structured JSON file and clicking Upload.
 
-<h2 id="dictionary-status">Changing the dictionary status</h2>
+<h3 id="dictionary-status">Changing the dictionary status</h2>
 
 As soon as you have at least one version of a dictionary uploaded, you will see a row in the table with the name, version number and other properties of each version. By clicking `action`, you can **download** the JSON file to your computer, **change the status** to `Active`, or **delete** the version (both options are only available if the status is `Preview`).
 
 If this option is enabled, the user can change the dictionary to a private one and specify a list of users with access to such content. Private dictionaries are a paid option. You can read more about it here: [Private dictionaries](https://technical.buildingsmart.org/services/bsdd/private-dictionaries/).
 
-> __Note:__ All of the above can also be done through the API interface, meaning it is possible to achieve the same result with third-party software implementing bSDD API. 
+> __Note:__ All of the above can also be done through <a href="https://app.swaggerhub.com/apis/buildingSMART/Dictionaries/v1">the bSDD API</a> interface, meaning it is possible to achieve the same result with a third-party software implementing the bSDD API. We publish the list of <a href="https://technical.buildingsmart.org/resources/software-implementations/?filter_5=bSDD+submit%2Fmanage&amp;mode=any">third-party tools to manage and upload data dictionaries in bSDD</a>.
+> 
